@@ -7,21 +7,35 @@ Marley Spoon CookBook Recipes Explorer
 
 Explore the most famous and easy to cook recipes that Marley Spoon have on catalogue.
 
-## Initial setup
+### Project Setup
+
+Export the following variables on your environment to configure Contentful
+
+```bash
+CONTENTFUL_SPACE=...
+CONTENTFUL_ENVIRONMENT=...
+CONTENTFUL_ACCESS_TOKEN=...
+```
+
+## Production
+
+### Server
 
 ```bash
 export RACK_ENV=production
 bundle install
-bundle exec ruby application.rb
+bundle exec shotgun
 ```
 
-# Development
 
-Intial implementation of a Backend API for handling CookBook Recipes
+## Development
 
-## Run the Server
+Intial implementation of a REST Backend API for handling CookBook Recipes
+
+### Server
 
 ```bash
+export RACK_ENV=development
 bundle install
-bundle exec ruby application.rb
+bundle exec shotgun
 ```
