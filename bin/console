@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+begin
+  require 'pry-byebug'
+rescue LoadError
+  require 'pry'
+end
+
+require_relative '../config/boot'
+
+Pry.start
+
