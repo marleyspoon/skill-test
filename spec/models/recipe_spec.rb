@@ -14,4 +14,16 @@ RSpec.describe Recipe, type: :model do
       expect(recipe.tags_label).to eq('vegan, quick')
     end
   end
+
+  describe '#chef_label' do
+    it 'returns an em dash when chef is missing' do
+      recipe = Recipe.new('id' => '1', 'title' => 'T', 'chef_name' => nil, 'description' => '')
+      expect(recipe.chef_label).to eq('—')
+    end
+
+    it 'returns the trimmed name when present' do
+      recipe = Recipe.new('id' => '1', 'title' => 'T', 'chef_name' => '  Pat  ', 'description' => '')
+      expect(recipe.chef_label).to eq('Pat')
+    end
+  end
 end

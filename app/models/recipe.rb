@@ -32,4 +32,8 @@ class Recipe
     list = Array(tags_list).compact_blank
     list.any? ? list.join(', ') : '—'
   end
+
+  def chef_label
+    chef_name.to_s.strip.presence || '—'
+  end
 end

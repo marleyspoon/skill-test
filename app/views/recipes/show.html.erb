@@ -1,0 +1,21 @@
+<% content_for :title, @recipe.title %>
+<article>
+  <h1><%= @recipe.title %></h1>
+  <p><%= link_to 'Back to recipes', recipes_path %></p>
+
+  <h2>Tags</h2>
+  <p><%= @recipe.tags_label %></p>
+
+  <h2>Chef</h2>
+  <p><%= @recipe.chef_label %></p>
+
+  <h2>Description</h2>
+  <p><%= @recipe.description %></p>
+
+  <h2>Image</h2>
+  <% if @recipe.image.present? %>
+    <%= image_tag @recipe.image, alt: @recipe.title %>
+  <% else %>
+    <p>No image</p>
+  <% end %>
+</article>
