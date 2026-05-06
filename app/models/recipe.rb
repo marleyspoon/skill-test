@@ -22,6 +22,22 @@ class Recipe
     all.find { |recipe| recipe.id == id }
   end
 
+  def self.search(query)
+    list = all
+    q = query.to_s.strip
+    return list if q.blank?
+
+    needle = q.downcase
+    list.select { |recipe| recipe.matches_search?(needle) }
+  end
+
+  def matches_search?(needle)
+    title.to_s.downcase.include?(needle) ||
+      description.to_s.downcase.include?(needle) ||
+      chef_name.to_s.downcase.include?(needle) ||
+      Array(tags_list).compact_blank.join(' ').downcase.include?(needle)
+  end
+
   def preview(length: 120)
     return '' if description.blank?
 

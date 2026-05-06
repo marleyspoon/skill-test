@@ -18,6 +18,32 @@ RSpec.describe 'Recipes', type: :request do
     end
   end
 
+  describe 'GET /recipes with search' do
+    it 'filters recipes by a query across title, description, and tags' do
+      get recipes_path, params: { q: 'chicken' }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Crispy Chicken and Rice')
+      expect(response.body).not_to include('White Cheddar Grilled Cheese')
+    end
+
+    it 'finds recipes by tag text' do
+      get recipes_path, params: { q: 'vegan' }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('White Cheddar Grilled Cheese')
+      expect(response.body).not_to include('Crispy Chicken and Rice')
+    end
+
+    it 'lists every recipe when the search box is empty' do
+      get recipes_path, params: { q: '' }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Tofu Saag Paneer with Buttery Toasted Pita')
+      expect(response.body).to include('Grilled Steak')
+    end
+  end
+
   describe 'GET /recipes/:id' do
     it 'shows title, tags, full description, image, chef, and a way back to the list' do
       get recipe_path('437eO3ORCME46i02SeCW46')

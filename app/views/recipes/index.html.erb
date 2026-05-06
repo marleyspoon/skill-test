@@ -1,5 +1,14 @@
 <% content_for :title, 'Recipes' %>
 <h1>Recipes</h1>
+
+<%= form_with url: recipes_path, method: :get, local: true do %>
+  <p>
+    <%= label_tag :q, 'Search' %>
+    <%= search_field_tag :q, params[:q] %>
+    <%= submit_tag 'Search' %>
+  </p>
+<% end %>
+
 <ul>
   <% @recipes.each do |recipe| %>
     <li>
