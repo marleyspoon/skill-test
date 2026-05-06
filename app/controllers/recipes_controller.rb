@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    return head :not_found if @recipe.nil?
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
   end
 end

@@ -23,17 +23,14 @@ require 'rspec/rails'
 # Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
 RSpec.configure do |config|
-  # Remove this line to enable support for ActiveRecord
-  config.use_active_record = false
+  config.use_active_record = true
+  config.fixture_paths = [Rails.root.join('spec/fixtures')]
+  config.use_transactional_fixtures = true
 
-  # If you enable ActiveRecord support you should uncomment these lines,
-  # note if you'd prefer not to run each example within a transaction, you
-  # should set use_transactional_fixtures to false.
-  #
-  # config.fixture_paths = [
-  #   Rails.root.join('spec/fixtures')
-  # ]
-  # config.use_transactional_fixtures = true
+  config.before(:suite) do
+    ActiveRecord::Migration.maintain_test_schema!
+    Recipe.import_from_fixture!
+  end
 
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
