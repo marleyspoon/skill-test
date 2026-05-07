@@ -2,7 +2,7 @@
 
 This repository is a **small Rails starter** for a live **pairing** interview (about **1.5 hours**). It is **not** a take-home assignment: you and the interviewer work together in the session.
 
-Before you join, **clone** the repository using the URL you were given, install the Ruby version declared in **`.ruby-version`**, install gems with **Bundler** from the **`Gemfile`**, and confirm the app runs:
+Before you join, **clone** the repository using the URL you were given, use **Ruby 3.2 or newer** (including 4.x), install gems with **Bundler** from the **`Gemfile`**, and confirm the app runs:
 
 ```bash
 bundle install
@@ -10,7 +10,7 @@ bin/rspec
 bin/rails server
 ```
 
-If anything fails to boot, fix or note it at the start of the session so you are not blocked on environment issues.
+If `bundle install` reports a Bundler version mismatch, run `gem install bundler` and retry. If anything else fails to boot, fix or note it at the start of the session so you are not blocked on environment issues.
 
 ## Before coding
 
