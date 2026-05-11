@@ -1,4 +1,20 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: skill_test
+      POSTGRES_PASSWORD: skill_test
+      POSTGRES_DB: skill_test_production
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skill_test -d skill_test_production"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   redis:
     image: redis:7-alpine
     command: redis-server --appendonly yes
@@ -22,15 +38,19 @@ services:
       start_period: 60s
     environment:
       RAILS_ENV: production
+      DATABASE_HOST: postgres
+      DATABASE_USER: skill_test
+      DATABASE_PASSWORD: skill_test
+      DATABASE_NAME: skill_test_production
       REDIS_URL: redis://redis:6379/0
       FORCE_SSL: "false"
       SECRET_KEY_BASE: ${SECRET_KEY_BASE:-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000}
-    volumes:
-      - app-storage:/app/storage
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
 
 volumes:
+  postgres-data:
   redis-data:
-  app-storage:

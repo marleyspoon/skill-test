@@ -9,8 +9,8 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     build-essential \
     curl \
-    libsqlite3-0 \
-    libsqlite3-dev \
+    libpq-dev \
+    libpq5 \
     pkg-config && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 

@@ -29,7 +29,7 @@ class Recipe < ApplicationRecord
         LOWER(title) LIKE :pattern
         OR LOWER(COALESCE(description, '')) LIKE :pattern
         OR LOWER(COALESCE(chef_name, '')) LIKE :pattern
-        OR LOWER(COALESCE(CAST(tags_list AS TEXT), '')) LIKE :pattern
+        OR LOWER(COALESCE(tags_list::text, '')) LIKE :pattern
       SQL
       pattern: pattern
     )

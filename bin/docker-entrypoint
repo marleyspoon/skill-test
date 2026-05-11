@@ -2,7 +2,7 @@
 set -euo pipefail
 
 rm -f tmp/pids/server.pid
-mkdir -p storage log tmp/pids
+mkdir -p log tmp/pids
 
 ./bin/rails db:prepare
 ./bin/rails db:seed
