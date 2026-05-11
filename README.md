@@ -42,3 +42,4 @@ The starter ships **only** this file and this description: there is **no** Ruby 
 4. **Database** — Persist recipes in a database and explain briefly how data reaches the DB (migration, seed, import, etc.).
 5. **Cache** — Improve **list** performance with caching and state briefly how you confirmed it works.
 6. **Docker** — Add the Docker artifacts needed to run the app in containers, including any services your database or cache setup requires.
+7. **PostgreSQL** — Run the application database on **PostgreSQL** (for example a **Postgres** service in Docker) instead of SQLite.
