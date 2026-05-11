@@ -39,7 +39,7 @@ The starter ships **only** this file and this description: there is **no** Ruby 
 1. **List** — Show every recipe with **title** (linked to the detail page), **tags**, and a **description** preview. Treat null `tags_list` and `chef_name` safely.
 2. **Detail** — Show one recipe with **title**, **tags**, **description**, **image**, and **chef name**. Decide how to present missing tags, chef, or a broken image.
 3. **Search** — Define what “search” covers in your requirements, then implement and test it.
-4. **Database** — Persist recipes in a database and explain briefly how data reaches the DB (migration, seed, import, etc.).
+4. **Database** — Persist recipes in **SQLite** (e.g. file-backed databases under `storage/`) and explain briefly how data reaches the DB (migration, seed, import, etc.).
 5. **Cache** — Improve **list** performance with caching and state briefly how you confirmed it works.
-6. **Docker** — Add the Docker artifacts needed to run the app in containers, including any services your database or cache setup requires.
+6. **Docker** — Add the Docker artifacts needed to run the app in containers, including any services your database or cache setup requires (with Task 4’s **SQLite** file DB, ensure **`storage/`** is writable—e.g. a Docker volume—alongside anything your cache setup needs).
 7. **PostgreSQL** — Run the application database on **PostgreSQL** (for example a **Postgres** service in Docker) instead of SQLite.
