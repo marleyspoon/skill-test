@@ -22,10 +22,10 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  config.assume_ssl = true
+  config.assume_ssl = ActiveModel::Type::Boolean.new.cast(ENV.fetch('FORCE_SSL', 'true'))
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = ActiveModel::Type::Boolean.new.cast(ENV.fetch('FORCE_SSL', 'true'))
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -43,8 +43,13 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # Replace the default in-process memory cache store with a durable alternative.
-  # config.cache_store = :mem_cache_store
+  # Use Redis when REDIS_URL is set (for example in Docker Compose); otherwise keep an in-process store.
+  config.cache_store =
+    if ENV['REDIS_URL'].present?
+      [:redis_cache_store, { url: ENV.fetch('REDIS_URL'), namespace: 'skill_test_cache' }]
+    else
+      :memory_store
+    end
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

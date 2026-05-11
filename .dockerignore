@@ -1,0 +1,11 @@
+.git
+.github
+log/*
+tmp/*
+spec
+node_modules
+coverage
+.env
+.env.*
+*.md
+!README.md

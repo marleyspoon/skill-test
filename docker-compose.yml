@@ -1,0 +1,36 @@
+services:
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3000/up"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    environment:
+      RAILS_ENV: production
+      REDIS_URL: redis://redis:6379/0
+      FORCE_SSL: "false"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000}
+    volumes:
+      - app-storage:/app/storage
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis-data:
+  app-storage:
