@@ -1,8 +1,16 @@
 # Rails interview exercise
 
-This repository is a **small Rails starter** for a live **pairing** interview (about **1.5 hours**). It is **not** a take-home assignment: you and the interviewer work together in the session.
+At Marley Spoon, we are building a small recipe application. The product needs to support listing recipes, viewing a single recipe, and searching recipes, but today it only has a raw JSON data source. In this session, you will take the first practical steps to turn that data into a working Rails app.
 
-Before you join, **clone** the repository using the URL you were given, use **Ruby 3.2 or newer** (including 4.x), install gems with **Bundler** from the **`Gemfile`**, and confirm the app runs:
+This repository is a **small Rails starter** for a live **pairing** interview (about **1.5 hours**).
+
+During the pairing session, we value:
+
+- clear communication about assumptions and trade-offs,
+- incremental delivery with small, tested steps,
+- pragmatic decisions that keep the code simple and maintainable.
+
+**Clone** the repository using the URL you were given, use **Ruby 3.2 or newer** (including 4.x), install gems with **Bundler** from the **`Gemfile`**, and confirm the app runs:
 
 ```bash
 bundle install
@@ -22,16 +30,7 @@ Use **TDD** with **RSpec**, in small steps: write a failing example, make it pas
 
 ## Data
 
-**`config/data/response.json`** is a JSON **array** of recipe objects. Each object uses these keys:
-
-| Field | Meaning |
-| --- | --- |
-| `id` | String identifier for the recipe. |
-| `title` | Recipe title (string). |
-| `description` | Long text; may include markdown-like markers or links in the source data. |
-| `image` | URL string for the hero image (may be missing or unreachable in real use). |
-| `chef_name` | String or **JSON `null`** — treat absent chef as a valid case. |
-| `tags_list` | Array of tag strings, or **JSON `null`** — treat absent tags as a valid case. |
+**`config/data/response.json`** is a JSON **array** of recipe objects.
 
 The starter ships **only** this file and this description: there is **no** Ruby code that reads, parses, or models it (no service, PORO, or routes/views for recipes). You add that as part of the **List** and **Detail** tasks below.
 
@@ -43,3 +42,4 @@ The starter ships **only** this file and this description: there is **no** Ruby 
 4. **Database** — Persist recipes in a database and explain briefly how data reaches the DB (migration, seed, import, etc.).
 5. **Cache** — Improve **list** performance with caching and state briefly how you confirmed it works.
 6. **Docker** — Add the Docker artifacts needed to run the app in containers, including any services your database or cache setup requires.
+7. **PostgreSQL** — Run the application database on **PostgreSQL** (for example a **Postgres** service in Docker) instead of SQLite.
